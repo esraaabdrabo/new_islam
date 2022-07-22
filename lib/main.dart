@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          accentColor: MyThemeData.accentColor,
-          primaryColor: MyThemeData.primaryColor),
-      home: splash(),
+          primaryColor: MyThemeData.primaryColor,
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(secondary: MyThemeData.accentColor)),
+      home: const splash(),
     );
   }
 }
