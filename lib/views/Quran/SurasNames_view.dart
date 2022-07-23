@@ -43,7 +43,8 @@ class _QuarnState extends State<Quarn> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => QuranDetails(names[index])));
+                          builder: (context) =>
+                              QuranDetails(names[index], index + 1)));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

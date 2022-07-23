@@ -46,7 +46,6 @@ class _homeState extends State<home> {
                           ? ChangeNotifierProvider(
                               create: (context) => SurasNames(),
                               builder: (context, child) {
-                                child:
                                 return const Quarn();
                               })
                           : const Sebha(),
