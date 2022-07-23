@@ -49,7 +49,7 @@ class _QuarnState extends State<Quarn> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    names[index],
+                    namesProvider.suraName[index],
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w300),
                     textAlign: TextAlign.center,

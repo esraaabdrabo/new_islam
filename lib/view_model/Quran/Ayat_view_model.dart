@@ -17,8 +17,13 @@ class Ayat extends ChangeNotifier {
   getAyat(suraNumber) async {
     chaneIsLoading(true);
     suraAyat = await AyatServices.readSura(suraNumber);
-    print(suraAyat);
 
+    List<String> ayatList = suraAyat.split('\n');
+    suraAyat = '';
+    for (int i = 0; i < ayatList.length - 1; i++) {
+      if (ayatList[i].trim() == '') continue;
+      suraAyat = suraAyat + ayatList[i] + '(${i + 1})';
+    }
     chaneIsLoading(false);
   }
 }

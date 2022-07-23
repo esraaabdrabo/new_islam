@@ -39,7 +39,13 @@ class QuranDetails extends StatelessWidget {
                 ),
                 Container(
                   decoration: const BoxDecoration(
-                      color: Color.fromARGB(140, 255, 255, 255),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            blurRadius: 10,
+                            offset: Offset(0, 15),
+                            color: Color.fromARGB(29, 2, 2, 2))
+                      ],
+                      color: Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   width: MediaQuery.of(context).size.width * .8,
                   height: MediaQuery.of(context).size.height * .7,
@@ -63,13 +69,19 @@ class QuranDetails extends StatelessWidget {
                       ),
                       //ayat
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * .5,
-                        child: Text(
-                          ayatProvider.suraAyat,
-                          textDirection: TextDirection.rtl,
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w100),
-                        ),
+                        height: MediaQuery.of(context).size.height * .5,
+                        width: MediaQuery.of(context).size.width * .7,
+                        child: ListView(children: [
+                          Text(
+                            ayatProvider.suraAyat,
+                            textAlign: TextAlign.center,
+                            textDirection: TextDirection.rtl,
+                            style: const TextStyle(
+                                letterSpacing: 6,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w100),
+                          ),
+                        ]),
                       ),
                     ]),
                   ]),
