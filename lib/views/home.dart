@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:new_islam/myThemeData.dart';
+import 'package:new_islam/views/hadeth.dart';
+import 'package:new_islam/views/Quran/quran.dart';
+import 'package:new_islam/views/radio.dart';
+import 'package:new_islam/views/sebha.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -9,38 +13,68 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  int selectedPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: MyThemeData.primaryColor,
-          title: const Text('Islami'),
-          centerTitle: true,
-        ),
-        bottomNavigationBar: Theme(
-          data:
-              Theme.of(context).copyWith(canvasColor: MyThemeData.primaryColor),
-          child: BottomNavigationBar(items: const [
-            const BottomNavigationBarItem(
+        bottomNavigationBar: bottomNav(),
+        body: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/default_bg.png'),
+                  fit: BoxFit.fill)),
+          child: Column(
+            children: [
+              // no app bar so we  want space before the islami text
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .05,
+              ),
+              //islami text
+              const Text(
+                'اسلامي',
+                style: TextStyle(fontSize: 30),
+              ),
+
+              selectedPageIndex == 0
+                  ? const Hadeth()
+                  : selectedPageIndex == 1
+                      ? const Radioo()
+                      : selectedPageIndex == 2
+                          ? const Quarn()
+                          : const Sebha(),
+            ],
+          ),
+        ));
+  }
+
+  Widget bottomNav() {
+    return Theme(
+      data: Theme.of(context).copyWith(canvasColor: MyThemeData.primaryColor),
+      child: BottomNavigationBar(
+          currentIndex: selectedPageIndex,
+          onTap: (index) {
+            selectedPageIndex = index;
+            setState(() {});
+          },
+          items: const [
+            BottomNavigationBarItem(
               label: 'Hadeth',
               icon: ImageIcon(AssetImage('assets/images/icon_hadeth.png')),
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               label: 'Radio',
               icon: const ImageIcon(AssetImage('assets/images/icon_radio.png')),
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               label: 'Quarn',
               icon: const ImageIcon(AssetImage('assets/images/icon_quran.png')),
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               label: 'Sebha',
               icon: const ImageIcon(AssetImage('assets/images/icon_sebha.png')),
             )
           ]),
-        ),
-        body: Container(
-          child: Image.asset('assets/images/default_bg.png'),
-        ));
+    );
   }
 }
