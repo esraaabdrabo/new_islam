@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_islam/myThemeData.dart';
 import 'package:new_islam/view_model/Quran/SurasNames_view_model.dart.dart';
 import 'package:new_islam/views/Quran/Ayat_View.dart';
+import 'package:new_islam/widgets/common_widgets.dart';
 import 'package:provider/provider.dart';
 
 class Quarn extends StatefulWidget {
@@ -19,23 +20,11 @@ class _QuarnState extends State<Quarn> {
     return Column(
       children: [
         // mus7f img
-        Image.asset('assets/images/qur2an_screen_logo.png'),
+        CommonWidgets.screenLogo('assets/images/qur2an_screen_logo.png'),
         //sura name text
-        Container(
-          padding: const EdgeInsets.all(10),
-          width: double.infinity,
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: MyThemeData.primaryColor,
-                  width: MediaQuery.of(context).size.width * .005)),
-          child: const Text(
-            'اسم السورة',
-            style: TextStyle(fontSize: 20),
-            textAlign: TextAlign.center,
-          ),
-        ),
+        CommonWidgets.tableName(context, 'اسم السورة'),
         SizedBox(
-          height: MediaQuery.of(context).size.height * .4,
+          height: MediaQuery.of(context).size.height * .45,
           child: ListView.builder(
             itemBuilder: (context, index) {
               return InkWell(
@@ -49,7 +38,7 @@ class _QuarnState extends State<Quarn> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    namesProvider.suraName[index],
+                    names[index],
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w300),
                     textAlign: TextAlign.center,
