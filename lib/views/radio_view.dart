@@ -8,14 +8,12 @@ class Radioo extends StatelessWidget {
   const Radioo({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController();
-
     return ChangeNotifierProvider(
         create: ((context) => RadioProvider()),
         builder: (context, child) {
           RadioProvider provider = Provider.of(context);
           List<RadioInfo> radios = provider.radios;
-
+          int index = provider.currentRadio;
           return provider.loading
               ? const Expanded(
                   child: Center(child: CircularProgressIndicator()))
@@ -30,33 +28,8 @@ class Radioo extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * .05,
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * .15,
-                        child: PageView.builder(
-                            controller: controller,
-                            onPageChanged: (index) {
-                              print(index);
-                            },
-                            itemCount: radios.length,
-                            itemBuilder: (context, index) {
-                              return SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      radios[index].name,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          letterSpacing: 5,
-                                          shadows: [
-                                            BoxShadow(
-                                                blurRadius: 3,
-                                                color: MyThemeData.primaryColor)
-                                          ]),
-                                    ),
-                                  ));
-                            }),
-                      ),
+                          height: MediaQuery.of(context).size.height * .15,
+                          child: Text(radios[index].name)),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * .05,
                       ),
@@ -67,8 +40,11 @@ class Radioo extends StatelessWidget {
                           const Spacer(
                             flex: 2,
                           ),
+                          //perivous icon
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                provider.showPerivousRadio();
+                              },
                               icon: const Icon(
                                 Icons.arrow_left,
                                 size: 50,
@@ -86,7 +62,9 @@ class Radioo extends StatelessWidget {
                             flex: 1,
                           ),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                provider.showNextRadio();
+                              },
                               icon: const Icon(
                                 Icons.arrow_right,
                                 size: 50,

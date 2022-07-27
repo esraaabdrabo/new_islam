@@ -6,6 +6,8 @@ class RadioProvider extends ChangeNotifier {
   bool loading = false;
   String errorMessage = '';
   List<RadioInfo> radios = [];
+  int currentRadio = 0;
+  String url = '';
 
   RadioProvider() {
     getRadios();
@@ -21,9 +23,26 @@ class RadioProvider extends ChangeNotifier {
     var respnse = await RadioServices.getRadios();
     if (respnse is Radios) {
       radios = respnse.radios;
+      url = radios[0].url;
     } else {
       errorMessage = 'حدث خطأ اعد المحاولة';
     }
     changeLoading(false);
+  }
+
+  showNextRadio() {
+    if (currentRadio == radios.length - 1) {
+      return null;
+    }
+    currentRadio++;
+    notifyListeners();
+  }
+
+  showPerivousRadio() {
+    if (currentRadio == 0) {
+      return null;
+    }
+    currentRadio--;
+    notifyListeners();
   }
 }
