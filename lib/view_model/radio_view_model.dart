@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:new_islam/model/radio_model.dart';
 import 'package:new_islam/services/radio_services.dart';
 
@@ -8,10 +9,13 @@ class RadioProvider extends ChangeNotifier {
   List<RadioInfo> radios = [];
   int currentRadio = 0;
   String url = '';
+  AudioPlayer audioPlayer = AudioPlayer();
+  bool isPlaying = false;
 
   RadioProvider() {
     getRadios();
   }
+
   changeLoading(bool value) {
     loading = value;
 
@@ -35,6 +39,7 @@ class RadioProvider extends ChangeNotifier {
       return null;
     }
     currentRadio++;
+    updateUrl();
     notifyListeners();
   }
 
@@ -43,6 +48,32 @@ class RadioProvider extends ChangeNotifier {
       return null;
     }
     currentRadio--;
+    updateUrl();
     notifyListeners();
+  }
+
+  updateUrl() {
+    url = radios[currentRadio].url;
+    if (isPlaying) {
+      stop();
+      play();
+    } else {
+      play();
+    }
+  }
+
+  play() async {
+    isPlaying = true;
+    notifyListeners();
+
+    await audioPlayer.setUrl(url);
+    await audioPlayer.play();
+  }
+
+  stop() async {
+    isPlaying = false;
+    notifyListeners();
+
+    await audioPlayer.stop();
   }
 }
