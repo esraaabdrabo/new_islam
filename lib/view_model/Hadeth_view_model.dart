@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_islam/services/Hadeth.dart';
+import 'package:new_islam/services/Hadeth_services.dart';
 
 class HadethProvider extends ChangeNotifier {
   String hadeth = '';

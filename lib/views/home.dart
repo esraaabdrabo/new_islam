@@ -3,8 +3,8 @@ import 'package:new_islam/myThemeData.dart';
 import 'package:new_islam/view_model/Quran/SurasNames_view_model.dart.dart';
 import 'package:new_islam/views/Hadeth/hadeths_names_view.dart';
 import 'package:new_islam/views/Quran/SurasNames_view.dart';
-import 'package:new_islam/views/radio.dart';
-import 'package:new_islam/views/sebha.dart';
+import 'package:new_islam/views/radio_view.dart';
+import 'package:new_islam/views/sebha_view.dart';
 import 'package:provider/provider.dart';
 
 class home extends StatefulWidget {

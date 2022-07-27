@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:new_islam/services/QuranAyat.dart';
+import 'package:new_islam/services/QuranAyat_services.dart';
 
 class Ayat extends ChangeNotifier {
   String suraAyat = '';
